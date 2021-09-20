@@ -2,8 +2,11 @@
 
 Class ProductController {
 
+    public $returnstring;
+
     public function __construct(){
-        $this->processInputId();
+        $this->returnstring = $this->processInputId();
+        return $this->returnstring;
     }
 
     /** 
@@ -16,7 +19,7 @@ Class ProductController {
                 $InputFiltered = filter_var($_GET['record_id'], FILTER_VALIDATE_INT);
                 if($InputFiltered){
                     $InputFilteredExp = filter_var($_GET['record_id'], FILTER_SANITIZE_NUMBER_INT);
-                    $this->detail($InputFilteredExp);
+                    return $this->detail($InputFilteredExp);
                 }else{
                     throw new Exception("Input processing problem - is not properly available");
                 }
@@ -40,14 +43,14 @@ Class ProductController {
             if($checkcacheexistence !== false){
                 $checkcacheexistence = $handlecache->increaseCacheQuery();
                 if($checkcacheexistence !== false){
-                    return $checkcacheexistence; // $data
+                    return $checkcacheexistence; // $data in json
                 }
             }else{
                 $getdbrecord = new DatabaseController();
                 $getdbrecord = $getdbrecord->getDbRecord($id); 
                 $addtocache = $handlecache->cacheAdd($getdbrecord);
                 if($addtocache !== false){
-                    return $addtocache; //data
+                    return $addtocache; // $data in json
                 }
             }
         }else{

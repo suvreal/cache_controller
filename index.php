@@ -23,6 +23,9 @@ spl_autoload_register ( function ($class) {
 ViewCacheData::cacheDataWriteout("Before processing", CacheController::cacheReturn());
 $ParameterCheck = new ProductController; // init instance
 ViewCacheData::cacheDataWriteout("After processing", CacheController::cacheReturn());
+echo("<pre>");
+print_r($ParameterCheck);
+echo("</pre>");
 
 
 ?>

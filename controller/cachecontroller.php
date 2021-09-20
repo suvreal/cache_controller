@@ -40,7 +40,7 @@ class CacheController{
     
     /** 
     * @param void
-    * @return array $getarray_cachefile
+    * @return string $getarray_cachefile
     * Increase cache load count according to ID
     */ 
     public function increaseCacheQuery(){
@@ -59,7 +59,7 @@ class CacheController{
                 if($putMyContents === FALSE ){
                     throw new Exception("Unable to put contents in cache.json");
                 }else{
-                    return $getarray_cachefile;
+                    return $getarray_cachefile_newdata;
                 }
             }
         }
@@ -68,7 +68,7 @@ class CacheController{
 
     /** 
     * @param array $data 
-    * @return array $getarray_cachefile
+    * @return string $getarray_cachefile
     * Add new data to cache json file
     */ 
     public function cacheAdd($data){
@@ -81,7 +81,7 @@ class CacheController{
         if($putTheContents === FALSE){
             throw new Exception("Unable to put contents in cache.json");
         }else{
-            return $getarray_cachefile;
+            return json_encode($getarray_cachefile);
         }
 
     }
