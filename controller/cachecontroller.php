@@ -10,7 +10,12 @@ class CacheController{
     public function __construct($postid){
         $this->postid = $postid;
         $this->cachefilepath = 'cache.json';
-        $this->cachefile = file_get_contents($this->cachefilepath);
+        if(file_exists($this->cachefilepath)){
+            $this->cachefile = file_get_contents($this->cachefilepath);
+        }else{
+            $this->cachefile = null;
+        }
+        
         
     }
 
@@ -117,7 +122,10 @@ class CacheController{
     * Get cache json data
     */ 
     public static function cacheReturn(){
-        return $getarray_cachefile = json_decode(file_get_contents("cache.json"), true);
+        if(file_exists("cache.json")){
+            return $getarray_cachefile = json_decode(file_get_contents("cache.json"), true);
+        }
+       
     }
 
 }
